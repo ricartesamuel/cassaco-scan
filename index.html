@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Prompt Menu > CRUD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="dist/styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="dist/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-500 flex items-center justify-center min-h-screen font-sans">
+<body class="bg-gray-500 min-h-screen font-sans flex items-center justify-center">
+  
+  <!--loading-->
+  <div id="loading-spinner" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+  </div>
 
-  <div id="app" class="w-full max-w-lg bg-gray-300 shadow-lg rounded-lg overflow-hidden">
+  <div id="app" class="w-full max-w-lg bg-gray-300 shadow-lg rounded-lg overflow-hidden mx-auto">
+    <div id="camera-flash"></div>
 
     <!-- home screen -->
     <div id="screen-initial" class="screen p-4 h-full flex flex-col">
@@ -21,12 +28,12 @@
         <button 
           id="take-photo" 
           class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
-          TIRAR FOTO
+          <i class="fa-solid fa-camera"></i> TIRAR FOTO
         </button>
         <button 
           id="upload-photo" 
           class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all">
-          CARREGAR IMAGEM
+          <i class="fa-solid fa-folder-open"></i> CARREGAR IMAGEM
         </button>
         <input type="file" id="photo-input" accept="image/*" class="hidden" />
       </div>
@@ -42,14 +49,19 @@
         <button 
           id="confirm-photo" 
           class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
-          ENVIAR PARA IA
+          <i class="fa-solid fa-upload"></i> ENVIAR PARA IA
         </button>
         <button 
           id="retake-photo" 
           class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all">
-          TIRAR OUTRA FOTO
+          <i class="fas fa-undo"></i> TIRAR OUTRA FOTO
         </button>
       </div>
+
+      <!-- feedback -->
+        <div id="feedback" class="mt-4 text-center text-gray-700 hidden">
+          <span id="feedback-message" class="text-sm italic"></span>
+        </div>
     </div>
 
     <!-- result screen -->
@@ -61,16 +73,15 @@
         <button 
           id="copy-result" 
           class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
-          COPIAR
+          <i class="fa-solid fa-copy"></i> COPIAR JSON
         </button>
         <button 
           id="reset-app" 
           class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all">
-          TENTAR NOVAMENTE
+          <i class="fas fa-undo"></i> TENTAR NOVAMENTE
         </button>
       </div>
     </div>
-
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
