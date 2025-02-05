@@ -122,7 +122,7 @@ function loadPhoto(event) {
 
 async function confirmPhoto() {
   try {
-    showLoadingSpinner(); // loading spinner
+    showLoadingSpinner();
 
     const canvas = photoPreview.querySelector('canvas');
     const imageData = canvas.toDataURL();
@@ -134,18 +134,18 @@ async function confirmPhoto() {
       { logger: (info) => console.log(info) }
     );
 
-    console.log('Texto extraído da imagem: ', text);
+    console.log('Texto extraído da imagem: ', text); // ocr text test
 
-    const prompt = `Extraia os dados do menu e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
-     O JSON deve conter as categorias de Saladas e Acompanhamentos. 
-     Para cada item, inclua o nome do prato, os ingredientes e o preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços) 
+    const prompt = `Extraia todos os dados do menu e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
+     O JSON deve conter as categorias de Saladas(se houver) e Acompanhamentos. 
+     Para cada item, inclua o nome do prato, os ingredientes e preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços) 
      Certifique-se de seguir o formato de indentação e quebras de linha. Aqui está o menu: ${text}`;
 
     const AIresponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer --api_key--" // API key goes here
+        Authorization: "Bearer --api-key--" // API key goes here
       },
       body: JSON.stringify({
         model: "gpt-4",
@@ -158,7 +158,7 @@ async function confirmPhoto() {
     });
 
     if (!AIresponse.ok) {
-      throw new Error(`Erro na comunicação com API: ${AIresponse.status}${AIresponse.statusText}`);
+      throw new Error(`Erro na comunicação com API: ${AIresponse.status} ${AIresponse.statusText}`);
     }
 
     const responseData = await AIresponse.json();
@@ -247,7 +247,7 @@ document.addEventListener('visibilitychange', () => {
         if (currentScreen === 'screen-initial') {
         startCamera(); 
       }
-    }, 200);
+    }, 100);
   }
 });
 

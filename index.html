@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Prompt Menu > CRUD</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="dist/styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-500 min-h-screen font-sans flex items-center justify-center">
+<body class="bg-gray-300 min-h-screen font-sans flex items-center justify-center">
   
   <!--loading-->
   <div id="loading-spinner" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -21,7 +21,7 @@
     <!-- home screen -->
     <div id="screen-initial" class="screen p-4 h-full flex flex-col">
       <div id="camera-view" class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg">
-        <video id="camera-stream" autoplay class="hidden w-full h-full object-cover rounded-lg"></video>
+        <video id="camera-stream" autoplay muted playsinline class="hidden w-full h-full object-cover rounded-lg"></video>
         <span id="camera-placeholder" class="text-gray-500">Camera Preview</span>
       </div>
       <div class="mt-4 flex gap-4">
@@ -45,7 +45,7 @@
         <canvas id="photo-canvas" class="hidden"></canvas>
         <span id="photo-placeholder" class="text-gray-500">Photo Preview</span>
       </div>
-      <div class="mt-4 flex gap-4">
+      <div id="confirm-screen-buttons" class="mt-4 flex gap-4">
         <button 
           id="confirm-photo" 
           class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
@@ -57,11 +57,9 @@
           <i class="fas fa-undo"></i> TIRAR OUTRA FOTO
         </button>
       </div>
-
-      <!-- feedback -->
-        <div id="feedback" class="mt-4 text-center text-gray-700 hidden">
-          <span id="feedback-message" class="text-sm italic"></span>
-        </div>
+      <div id="feedback" class="hidden">
+        <span id="feedback-message" class="text-sm italic"></span>
+      </div>
     </div>
 
     <!-- result screen -->
