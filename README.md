@@ -15,6 +15,7 @@ e estruturar os dados em formato JSON utilizando a API do OpenAI (GPT-4).
 
 ## Estrutura do projeto
 
+```
 prompt-menu-crud/
 ├── dist/
 │ ├── styles.css
@@ -30,6 +31,7 @@ prompt-menu-crud/
 ├── README.md
 ├── .gitignore
 └── .prettierrc
+```
 
 ## Dependências(estão listadas no package.json e serão instaladas automaticamente com o uso do npm)
 
