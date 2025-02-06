@@ -18,7 +18,7 @@ e estruturar os dados em formato JSON utilizando a API do OpenAI (GPT-4).
 prompt-menu-crud/
 ├── dist/
 │ ├── styles.css
-├── node_modules/  
+├── node_modules/
 ├── src/
 │ ├── app.js
 │ ├── styles.css
@@ -33,16 +33,16 @@ prompt-menu-crud/
 
 ## Dependências(estão listadas no package.json e serão instaladas automaticamente com o uso do npm)
 
-├── autoprefixer@10.4.20
-├── class-variance-authority@0.7.1
-├── clsx@2.1.1
-├── lucide-react@0.469.0
-├── postcss@8.4.49
-├── prettier@3.4.2
-├── shadcn-ui@0.9.4
-├── tailwind-merge@2.6.0
-├── tailwindcss-animate@1.0.7
-└── tailwindcss@3.4.17
+- `autoprefixer@10.4.20`
+- `class-variance-authority@0.7.1`
+- `clsx@2.1.1`
+- `lucide-react@0.469.0`
+- `postcss@8.4.49`
+- `prettier@3.4.2`
+- `shadcn-ui@0.9.4`
+- `tailwind-merge@2.6.0`
+- `tailwindcss-animate@1.0.7`
+- `tailwindcss@3.4.17`
 
 ## Pré-requisitos
 
