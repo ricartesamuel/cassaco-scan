@@ -2,14 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
 #camera-container {
   position: relative;
   display: inline-block;
 }
+
 #camera-view {
   border-radius: 8px !important;
 }
+
 #camera-flash {
   position: absolute;
   top: 0;
@@ -29,10 +30,10 @@
 
 #photo-preview canvas {
   @apply max-h-[70vh] w-auto object-contain;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px !important;
-    object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px !important;
+  object-fit: contain;
 }
 button {
   font-family: monospace !important;
@@ -56,21 +57,16 @@ button {
 
 #screen-final .flex-grow {
   flex-grow: 1;
-  overflow-y: auto; 
-  max-height: calc(100vh - 120px); 
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
 }
 
 #screen-final .mt-4 {
-  margin-top: 1rem; 
+  margin-top: 1rem;
 }
 
-
-/* mobile */
-@media only screen 
-  and (min-device-width: 393px) /* Largura em CSS do Redmi Note 8 */ /* Largura em CSS do Redmi Note 8 */ /* Altura em CSS do Redmi Note 8 */
-  and (max-device-height: 851px) /* Altura em CSS do Redmi Note 8 */
-  and (orientation: portrait) { /* Apenas modo retrato */
-  
+/* redmi note 8 tests */
+@media only screen and (min-device-width: 393px) and (max-device-height: 851px) and (orientation: portrait) {
   body {
     @apply fixed h-screen w-screen; /* mobile override */
     display: block !important; /* remove flex from desktop */
@@ -79,6 +75,7 @@ button {
   #app {
     @apply h-full max-w-none rounded-none shadow-none; /* override mobile */
     width: 100vw !important;
+    border: none;
   }
 
   .screen > div:last-child {
@@ -95,7 +92,7 @@ button {
 
   #photo-preview {
     max-height: 82vh; /* preview on confirm screen */
-    overflow: hidden; 
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,7 +104,7 @@ button {
   }
   #feedback {
     position: fixed;
-    bottom: 100px; 
+    bottom: 100px;
     left: 0;
     right: 0;
     text-align: center;
@@ -115,28 +112,28 @@ button {
     padding: 8px;
   }
   #camera-view {
-    max-height: 82vh; /*video on initial screen*/
-    overflow: hidden; 
+    max-height: 82vh;
+    overflow: hidden;
     background-color: gray;
   }
 }
 
 /* ios adjust */
 @media only screen and (max-width: 414px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
-  /* Garantir que o body ocupe toda a tela */
   body {
     height: 100vh;
     overflow: hidden;
     flex-direction: column;
   }
 
-  /* Ajustar o container principal */
   #app {
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border: none;
   }
+
   .screen > div:last-child {
     position: fixed;
     bottom: 1px;
@@ -149,38 +146,34 @@ button {
     z-index: 100;
   }
 
-  /* Ajustar a altura da photo-preview */
   #photo-preview {
-    max-height: 82vh; /* preview on confirm screen */
-    overflow: hidden; 
+    max-height: 82vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* Ajustar o canvas da foto */
   #photo-preview canvas {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Garantir que a foto caiba na tela */
+    object-fit: contain;
   }
 
-  /* Fixar os botões no rodapé */
   #confirm-screen-buttons {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgb(209 213 219); /* Cor de fundo dos botões */
+    background-color: rgb(209 213 219);
     padding: 16px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
-    z-index: 1000; /* Garantir que os botões fiquem acima de outros elementos */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
 
-  
   #feedback {
     position: fixed;
-    bottom: 100px; 
+    bottom: 100px;
     left: 0;
     right: 0;
     text-align: center;
@@ -188,7 +181,6 @@ button {
     padding: 8px;
   }
 }
-
 
 @keyframes camera-flash {
   0% {
@@ -201,7 +193,7 @@ button {
     filter: brightness(1);
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;

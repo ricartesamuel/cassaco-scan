@@ -10,18 +10,15 @@ const resultText = document.getElementById('result');
 const copyResultButton = document.getElementById('copy-result');
 const resetAppButton = document.getElementById('reset-app');
 
-
 function showLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
   spinner.classList.remove('hidden');
 }
 
-
 function hideLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
   spinner.classList.add('hidden');
 }
-
 
 function stopCamera() {
   const stream = cameraStream.srcObject;
@@ -29,20 +26,21 @@ function stopCamera() {
     const tracks = stream.getTracks();
     tracks.forEach(track => track.stop());
   }
-  cameraStream.srcObject = null; 
+  cameraStream.srcObject = null;
 }
 
 function startCamera() {
   const constraints = {
     video: {
-      facingMode: { ideal: "environment" }, // stnd camera & resolution //
-      width: { min: 1280 }, 
-      height: { min: 720 }, 
+      facingMode: { ideal: 'environment' }, // stnd camera & resolution //
+      width: { min: 1280 },
+      height: { min: 720 },
       frameRate: { min: 30 }
     }
   };
 
-  navigator.mediaDevices.getUserMedia(constraints)
+  navigator.mediaDevices
+    .getUserMedia(constraints)
     .then(stream => {
       cameraStream.srcObject = stream;
       cameraStream.classList.remove('hidden');
@@ -58,7 +56,7 @@ function triggerCameraFlash() {
   const camera = document.getElementById('camera-stream');
   camera.style.animation = 'camera-flash 0.15s ease';
   setTimeout(() => {
-    camera.style.animation = ''; 
+    camera.style.animation = '';
   }, 150);
 }
 
@@ -81,15 +79,13 @@ function showScreen(screenId) {
   const screens = document.querySelectorAll('.screen');
   screens.forEach(screen => {
     screen.classList.add('hidden');
-  }
-);
+  });
 
   const screenToShow = document.getElementById(screenId);
   if (screenToShow) {
     screenToShow.classList.remove('hidden');
   }
 
-  
   if (screenId === 'screen-initial') {
     startCamera();
   }
@@ -99,10 +95,10 @@ function loadPhoto(event) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       const img = new Image();
       img.src = e.target.result;
-      img.onload = function() {
+      img.onload = function () {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         canvas.width = img.width;
@@ -128,33 +124,39 @@ async function confirmPhoto() {
     const imageData = canvas.toDataURL();
 
     // OCR
-    const { data: { text } } = await Tesseract.recognize(
+    const {
+      data: { text }
+    } = await Tesseract.recognize(
       imageData,
       'por', // lang
-      { logger: (info) => console.log(info) }
+      { logger: info => console.log(info) }
     );
 
-    console.log('Texto extraído da imagem: ', text); // ocr text test
+    console.log('Texto extraído via OCR: ', text); // ocr text
 
     const prompt = `Extraia todos os dados do menu e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
      O JSON deve conter as categorias de Saladas(se houver) e Acompanhamentos. 
      Para cada item, inclua o nome do prato, os ingredientes e preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços) 
      Certifique-se de seguir o formato de indentação e quebras de linha. Aqui está o menu: ${text}`;
 
-    const AIresponse = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
+    const AIresponse = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer --api-key--" // API key goes here
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer --api-key--' // API key goes here
       },
       body: JSON.stringify({
-        model: "gpt-4",
+        model: 'gpt-4',
         messages: [
-          { role: "system", content: "Você é um especialista em estruturação de dados gastronômicos. Siga rigorosamente as instruções do usuário e retorne os dados apenas em formato JSON" },
-          { role: "user", content: prompt },
+          {
+            role: 'system',
+            content:
+              'Você é um especialista em estruturação de dados gastronômicos. Siga rigorosamente as instruções do usuário e retorne os dados apenas em formato JSON'
+          },
+          { role: 'user', content: prompt }
         ],
-        max_tokens: 1000,
-      }),
+        max_tokens: 1000
+      })
     });
 
     if (!AIresponse.ok) {
@@ -164,7 +166,6 @@ async function confirmPhoto() {
     const responseData = await AIresponse.json();
     const rawContent = responseData.choices[0].message.content;
 
-
     try {
       const parsedData = JSON.parse(rawContent);
       resultText.textContent = JSON.stringify(parsedData, null, 2);
@@ -173,7 +174,6 @@ async function confirmPhoto() {
     } catch (parseError) {
       throw new Error(`Formato inválido recebido: ${parseError.message}`);
     }
-
   } catch (error) {
     showFeedback(`${error.message}`, 'bg-red-300 text-red-800');
     console.error(error);
@@ -186,17 +186,18 @@ async function confirmPhoto() {
 function showFeedback(message, styles = 'bg-gray-100 text-gray-700') {
   const feedbackElement = document.getElementById('feedback');
   const messageElement = document.getElementById('feedback-message');
-  
+
   feedbackElement.classList.remove('hidden', 'bg-red-100', 'bg-green-100', 'bg-gray-100');
   messageElement.className = `text-sm italic px-3 py-2 rounded-lg ${styles}`;
   messageElement.textContent = message;
-  
+
   feedbackElement.classList.remove('hidden');
   setTimeout(() => feedbackElement.classList.add('hidden'), 5000);
 }
 
 function copyResult() {
-  navigator.clipboard.writeText(resultText.textContent)
+  navigator.clipboard
+    .writeText(resultText.textContent)
     .then(() => {
       alert('Copiado com sucesso!');
     })
@@ -215,42 +216,41 @@ function resetApp() {
 takePhotoButton.addEventListener('click', capturePhoto);
 uploadPhotoButton.addEventListener('click', () => photoInput.click());
 
-photoInput.addEventListener('change', (event) => {
+photoInput.addEventListener('change', event => {
   const file = event.target.files[0];
   if (file && file.type.startsWith('image/')) {
     loadPhoto(event);
   } else {
     alert('Por favor, carregue um arquivo de imagem válido.');
-    photoInput.value = ''; 
+    photoInput.value = '';
   }
 });
 
 confirmPhotoButton.addEventListener('click', confirmPhoto);
 retakePhotoButton.addEventListener('click', () => {
-  stopCamera(); 
+  stopCamera();
   showScreen('screen-initial');
-  startCamera(); 
+  startCamera();
 });
 copyResultButton.addEventListener('click', copyResult);
 resetAppButton.addEventListener('click', () => {
-  stopCamera(); 
+  stopCamera();
   resetApp();
 });
 
 // stops camera if app window is not on-screen
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') {
-    stopCamera(); 
+    stopCamera();
   } else if (document.visibilityState === 'visible') {
     setTimeout(() => {
-        const currentScreen = document.querySelector('.screen:not(.hidden)').id;
-        if (currentScreen === 'screen-initial') {
-        startCamera(); 
+      const currentScreen = document.querySelector('.screen:not(.hidden)').id;
+      if (currentScreen === 'screen-initial') {
+        startCamera();
       }
     }, 100);
   }
 });
-
 
 startCamera();
 showScreen('screen-initial');

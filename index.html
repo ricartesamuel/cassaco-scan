@@ -1,88 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Prompt Menu > CRUD</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="dist/styles.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-300 min-h-screen font-sans flex items-center justify-center">
-  
-  <!--loading-->
-  <div id="loading-spinner" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>Prompt Menu > CRUD</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="dist/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-300 min-h-screen font-sans flex items-center justify-center">
+    <!--loading-->
+    <div
+      id="loading-spinner"
+      class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+    >
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+    </div>
 
-  <div id="app" class="w-full max-w-lg bg-gray-300 shadow-lg rounded-lg overflow-hidden mx-auto">
-    <div id="camera-flash"></div>
+    <div
+      id="app"
+      class="w-full max-w-lg bg-gray-300 shadow-lg rounded-lg overflow-hidden mx-auto border-2 border-gray-500"
+    >
+      <div id="camera-flash"></div>
 
-    <!-- home screen -->
-    <div id="screen-initial" class="screen p-4 h-full flex flex-col">
-      <div id="camera-view" class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg">
-        <video id="camera-stream" autoplay muted playsinline class="hidden w-full h-full object-cover rounded-lg"></video>
-        <span id="camera-placeholder" class="text-gray-500">Camera Preview</span>
+      <!-- home screen -->
+      <div id="screen-initial" class="screen p-4 h-full flex flex-col">
+        <div
+          id="camera-view"
+          class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg"
+        >
+          <video
+            id="camera-stream"
+            autoplay
+            muted
+            playsinline
+            class="hidden w-full h-full object-cover rounded-lg"
+          ></video>
+          <span id="camera-placeholder" class="text-gray-500">Camera Preview</span>
+        </div>
+        <div class="mt-4 flex gap-4">
+          <button
+            id="take-photo"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+          >
+            <i class="fa-solid fa-camera"></i> TIRAR FOTO
+          </button>
+          <button
+            id="upload-photo"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all"
+          >
+            <i class="fa-solid fa-folder-open"></i> CARREGAR IMAGEM
+          </button>
+          <input type="file" id="photo-input" accept="image/*" class="hidden" />
+        </div>
       </div>
-      <div class="mt-4 flex gap-4">
-        <button 
-          id="take-photo" 
-          class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
-          <i class="fa-solid fa-camera"></i> TIRAR FOTO
-        </button>
-        <button 
-          id="upload-photo" 
-          class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all">
-          <i class="fa-solid fa-folder-open"></i> CARREGAR IMAGEM
-        </button>
-        <input type="file" id="photo-input" accept="image/*" class="hidden" />
+
+      <!-- confirm screen -->
+      <div id="screen-confirm" class="screen p-4 h-full flex flex-col hidden">
+        <div
+          id="photo-preview"
+          class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg"
+        >
+          <canvas id="photo-canvas" class="hidden"></canvas>
+          <span id="photo-placeholder" class="text-gray-500">Photo Preview</span>
+        </div>
+        <div id="confirm-screen-buttons" class="mt-4 flex gap-4">
+          <button
+            id="confirm-photo"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+          >
+            <i class="fa-solid fa-upload"></i> ENVIAR PARA IA
+          </button>
+          <button
+            id="retake-photo"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all"
+          >
+            <i class="fas fa-undo"></i> TIRAR OUTRA FOTO
+          </button>
+        </div>
+        <div id="feedback" class="hidden">
+          <span id="feedback-message" class="text-sm italic"></span>
+        </div>
+      </div>
+
+      <!-- result screen -->
+      <div id="screen-final" class="screen p-4 h-full flex flex-col hidden">
+        <div class="flex-grow bg-gray-100 p-4 rounded-lg overflow-auto">
+          <pre id="result" class="text-sm text-gray-700">Resultado JSON</pre>
+        </div>
+        <div class="mt-4 flex gap-4">
+          <button
+            id="copy-result"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+          >
+            <i class="fa-solid fa-copy"></i> COPIAR JSON
+          </button>
+          <button
+            id="reset-app"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all"
+          >
+            <i class="fas fa-undo"></i> TENTAR NOVAMENTE
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- confirm screen -->
-    <div id="screen-confirm" class="screen p-4 h-full flex flex-col hidden">
-      <div id="photo-preview" class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg">
-        <canvas id="photo-canvas" class="hidden"></canvas>
-        <span id="photo-placeholder" class="text-gray-500">Photo Preview</span>
-      </div>
-      <div id="confirm-screen-buttons" class="mt-4 flex gap-4">
-        <button 
-          id="confirm-photo" 
-          class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
-          <i class="fa-solid fa-upload"></i> ENVIAR PARA IA
-        </button>
-        <button 
-          id="retake-photo" 
-          class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all">
-          <i class="fas fa-undo"></i> TIRAR OUTRA FOTO
-        </button>
-      </div>
-      <div id="feedback" class="hidden">
-        <span id="feedback-message" class="text-sm italic"></span>
-      </div>
-    </div>
-
-    <!-- result screen -->
-    <div id="screen-final" class="screen p-4 h-full flex flex-col hidden">
-      <div class="flex-grow bg-gray-100 p-4 rounded-lg overflow-auto">
-        <pre id="result" class="text-sm text-gray-700">Resultado JSON</pre>
-      </div>
-      <div class="mt-4 flex gap-4">
-        <button 
-          id="copy-result" 
-          class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all">
-          <i class="fa-solid fa-copy"></i> COPIAR JSON
-        </button>
-        <button 
-          id="reset-app" 
-          class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all">
-          <i class="fas fa-undo"></i> TENTAR NOVAMENTE
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
-  <script src="./src/app.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
+    <script src="./src/app.js"></script>
+  </body>
 </html>
