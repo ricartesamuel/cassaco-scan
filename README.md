@@ -1,6 +1,5 @@
-# Cassaco Scan
-
-<p align="left" width="100%">
+<h1 align="center">Cassaco Scan</h1>
+<p align="center" width="100%">
     <img width="50%" src="assets/logo.png"> 
 </p>
 
