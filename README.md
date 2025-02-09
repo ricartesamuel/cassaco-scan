@@ -1,4 +1,4 @@
-<h1 align="center">Cassaco Scan</h1>
+<h1 align="center" width="100%">Cassaco Scan</h1>
 <p align="center" width="100%">
     <img width="50%" src="assets/logo.png"> 
 </p>
