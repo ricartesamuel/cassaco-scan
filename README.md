@@ -1,5 +1,5 @@
-<div style="text-align: right;">
-  <img src="assets/logo.png" alt="Logo do Projeto" width="150">
+<div style="text-align: center;">
+  <img src="assets/logo.png" alt="Logo do Projeto" width="300">
 </div>
 
 # Cassaco Scan
