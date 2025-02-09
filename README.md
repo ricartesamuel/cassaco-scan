@@ -19,12 +19,14 @@ Este projeto é uma aplicação web que permite capturar ou carregar imagens de 
 
 ```
 cassaco-scan/
+├── assets/
+│   └── logo.png
 ├── dist/
-│ ├── styles.css
+│   └── styles.css
 ├── node_modules/
 ├── src/
-│ ├── app.js
-│ ├── styles.css
+│   ├── app.js
+│   └── styles.css
 ├── package.json
 ├── package-lock.json
 ├── tailwind.config.js
