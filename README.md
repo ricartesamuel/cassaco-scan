@@ -1,8 +1,8 @@
-<p align="right" width="150%">
-    <img width="33%" src="assets/logo.png"> 
-</p>
-
 # Cassaco Scan
+
+<p align="right" style="float: right; margin-left: 20px; margin-bottom: 20px;">
+  <img width="33%" src="assets/logo.png" alt="Logo do Projeto">
+</p>
 
 Este projeto é uma aplicação web que permite capturar ou carregar imagens de um cardápio, extrai texto da imagem utilizando OCR (Optical Character Recognition) com Tesseract.js e envia os dados para a API do OpenAI (GPT-4), que por sua vez retornará um JSON com os metadados do texto extraído.
 
