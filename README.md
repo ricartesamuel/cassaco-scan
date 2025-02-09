@@ -1,4 +1,4 @@
-<div style="display: flex; align-items: center; justify-content: space-between;">
+<div style="display: flex; align-items: right; justify-content: space-between;">
   <h1>Cassaco Scan</h1>
   <img src="assets/logo.png" alt="Logo do Projeto" width="300">
 </div>
