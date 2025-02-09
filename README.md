@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<div style="float: right; margin-left: 20px;">
   <img src="assets/logo.png" alt="Logo do Projeto" width="300">
 </div>
 
