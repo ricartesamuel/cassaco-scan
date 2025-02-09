@@ -1,7 +1,10 @@
-# Prompt Menu > CRUD
+<div style="text-align: right;">
+  <img src="assets/logo.png" alt="Logo do Projeto" width="150">
+</div>
 
-Este projeto é uma aplicação web que permite capturar imagens de um menu, extrair texto usando OCR (Optical Character Recognition) com Tesseract.js
-e estruturar os dados em formato JSON utilizando a API do OpenAI (GPT-4).
+# Cassaco Scan
+
+Este projeto é uma aplicação web que permite capturar ou carregar imagens de um cardápio, extrai texto da imagem utilizando OCR (Optical Character Recognition) com Tesseract.js e envia os dados para a API do OpenAI (GPT-4), que por sua vez retornará um JSON com os metadados do texto extraído.
 
 ## Tecnologias Utilizadas
 
