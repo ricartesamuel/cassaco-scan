@@ -18,7 +18,7 @@ Este projeto é uma aplicação web que permite capturar ou carregar imagens de 
 ## Estrutura do projeto
 
 ```
-prompt-menu-crud/
+cassaco-scan/
 ├── dist/
 │ ├── styles.css
 ├── node_modules/
@@ -72,13 +72,13 @@ Para rodar o projeto localmente, você precisará de:
 1. Abra o terminal no editor de código e clone o repositório:
 
    ```bash
-    git clone https://github.com/ricartesamuel/prompt-menu-crud.git
+    git clone https://github.com/ricartesamuel/cassaco-scan.git
    ```
 
 2. Navegue até a pasta do projeto:
 
    ```bash
-    cd prompt-menu-crud
+    cd cassaco-scan
    ```
 
 3. Instale as dependências e compile o CSS:
