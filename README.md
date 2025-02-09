@@ -1,4 +1,4 @@
-<p align="right" width="100%">
+<p align="right" width="150%">
     <img width="33%" src="assets/logo.png"> 
 </p>
 
