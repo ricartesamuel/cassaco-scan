@@ -86,11 +86,11 @@ Para rodar o projeto localmente, você precisará de:
 3. Instale as dependências e compile o CSS:
    ```bash
     npm install
-    npm run build:css
+    npm run build
    ```
-4. Com as dependências instaladas e a extensão do Live server instalado no VSCode execute:
+4. Com as dependências instaladas execute:
    ```bash
-    npm run start
+    npm run dev
    ```
 
 ## Como Usar a aplicação
