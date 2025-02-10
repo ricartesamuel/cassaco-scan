@@ -56,9 +56,8 @@ Para rodar o projeto localmente, você precisará de:
 
 - [Node.js](https://nodejs.org/en/download) (versão 22.12.0 ou superior com npm)
 - Uma chave de API da OpenAI funcional
-- Um editor de código(Recomendado VSCode)
-- Instalar a extensão Live Server no VSCode
-- No iOS: Chrome 115 ou versão mais recente
+- Um editor de código
+- No iOS: Chrome 115 ou versão mais recente(também é recomendado utilizar a aplicação via Chrome no Desktop)
 
 ## Configuração da API da OpenAI
 
@@ -94,6 +93,9 @@ Para rodar o projeto localmente, você precisará de:
    ```
 
 ## Como Usar a aplicação
+
+Tela inicial:
+Clique em começar e dê permissão de acesso à câmera
 
 Tirar Foto:
 Clique no botão "TIRAR FOTO" para capturar uma imagem usando a câmera do dispositivo.

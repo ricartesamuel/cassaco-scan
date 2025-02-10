@@ -8,6 +8,7 @@ const confirmPhotoButton = document.getElementById('confirm-photo');
 const retakePhotoButton = document.getElementById('retake-photo');
 const resultText = document.getElementById('result');
 const copyResultButton = document.getElementById('copy-result');
+const startAppButton = document.getElementById('start-app'); // Nova referência
 const resetAppButton = document.getElementById('reset-app');
 
 function showLoadingSpinner() {
@@ -18,6 +19,10 @@ function showLoadingSpinner() {
 function hideLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
   spinner.classList.add('hidden');
+}
+
+function startApp() {
+  showScreen('screen-initial'); // Redireciona para a home-screen
 }
 
 function stopCamera() {
@@ -215,6 +220,10 @@ function resetApp() {
 // event listeners
 takePhotoButton.addEventListener('click', capturePhoto);
 uploadPhotoButton.addEventListener('click', () => photoInput.click());
+startAppButton.addEventListener('click', () => {
+  showScreen('screen-initial');
+  startCamera();
+}); // demo screen button //
 
 photoInput.addEventListener('change', event => {
   const file = event.target.files[0];
@@ -238,7 +247,7 @@ resetAppButton.addEventListener('click', () => {
   resetApp();
 });
 
-// stops camera if app window is not on-screen
+// stops camera if app window is not on-screen and starts camera if current screen is home-screen //
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') {
     stopCamera();
@@ -252,5 +261,4 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-startCamera();
-showScreen('screen-initial');
+showScreen('screen-demo');
