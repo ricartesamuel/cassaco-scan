@@ -283,7 +283,40 @@ button {
     overflow: hidden;
     border: none;
   }
+  .url-container {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+    z-index: 1000;
+  }
+  .url-container button {
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+  .url-container button .coming-soon {
+    font-size: 10px !important;
+    top: -6px !important;
+    right: -6px !important;
+    padding: 2px 4px !important;
+  }
+  #screen-demo h1 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
 
+  #screen-demo .flex-grow {
+    justify-content: flex-start;
+    padding-top: 10px;
+  }
+
+  #screen-demo img {
+    height: auto;
+    margin-bottom: 20px !important;
+    margin-top: 20px;
+  }
   .screen > div:last-child {
     position: fixed;
     bottom: 1px;
