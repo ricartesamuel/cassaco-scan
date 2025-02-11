@@ -3,7 +3,7 @@
     <img width="50%" src="assets/logo.png"> 
 </p>
 
-Este projeto é uma aplicação web que permite capturar ou carregar imagens de um cardápio, extrai texto da imagem utilizando OCR (Optical Character Recognition) com Tesseract.js e envia os dados para a API do OpenAI (GPT-4), que por sua vez retornará um JSON com os metadados do texto extraído.
+Este projeto é uma aplicação web que permite capturar ou carregar imagens de um cardápio, extrair texto da imagem utilizando OCR (Optical Character Recognition) com Tesseract.js e enviar os dados para a API do OpenAI (GPT-4), que por sua vez, retornará um JSON com os metadados do texto extraído.
 
 ## Tecnologias Utilizadas
 
@@ -63,9 +63,9 @@ Para rodar o projeto localmente, você precisará de:
 
 1. Acesse [OpenAI](https://platform.openai.com/signup) e crie uma conta, caso ainda não tenha uma.
 2. Após o login, acesse [API Keys](https://platform.openai.com/account/api-keys) e gere uma nova chave de API.
-3. Você deve colar sua API KEY no arquivo [app.js], deve substituir "--api-key--" pela sua chave e salvar. Esse é o trecho do javascript(linha 146):
-   ```javascript
-   Authorization: 'Bearer --api-key--'; // API key goes here
+3. Você deve colar sua API KEY no campo onde diz: "Digite ou cole sua chave API aqui..." na tela de confirmação da imagem.
+   ```
+
    ```
 
 ## Instalação
@@ -95,19 +95,19 @@ Para rodar o projeto localmente, você precisará de:
 ## Como Usar a aplicação
 
 Tela inicial:
-Clique em começar e dê permissão de acesso à câmera
+Escolha "Tirar" e dê permissão de acesso à câmera, ou "Imagem" e carregue uma foto de sua escolha.
 
 Tirar Foto:
-Clique no botão "TIRAR FOTO" para capturar uma imagem usando a câmera do dispositivo.
+Clique no botão "Tirar Foto" para capturar uma imagem usando a câmera do dispositivo.
 
 Carregar Imagem:
-Clique no botão "CARREGAR IMAGEM" para selecionar uma imagem do seu dispositivo. Apenas arquivos com formato de imagem são válidos.
+Clique no botão "Carregar Imagem" para selecionar uma imagem do seu dispositivo. Apenas arquivos com formato de imagem são válidos.
 
 Confirmar e Processar:
-Após capturar ou carregar a imagem, clique em "ENVIAR PARA IA" para processar o texto da imagem e gerar o JSON.
+Após capturar ou carregar a imagem, clique em "Enviar Para Análise" para processar o texto da imagem e gerar o JSON.
 
 Copiar Resultado:
-O JSON gerado pode ser copiado para a área de transferência clicando em "COPIAR JSON".
+O JSON gerado pode ser copiado para a área de transferência clicando em "Copiar Json".
 
 Reiniciar:
-Clique em "TENTAR NOVAMENTE" para reiniciar o processo.
+Clique em "Tentar Novamente" para reiniciar todo o processo.
