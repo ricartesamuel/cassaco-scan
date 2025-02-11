@@ -10,7 +10,7 @@ const retakePhotoButton = document.getElementById('retake-photo');
 const verifyApiKeyButton = document.getElementById('verify-api-key');
 const resultText = document.getElementById('result');
 const copyResultButton = document.getElementById('copy-result');
-const startAppButton = document.getElementById('start-app'); // Nova referência
+const startAppButton = document.getElementById('start-app');
 const resetAppButton = document.getElementById('reset-app');
 
 function showLoadingSpinner() {
@@ -24,7 +24,7 @@ function hideLoadingSpinner() {
 }
 
 function startApp() {
-  showScreen('screen-initial'); // Redireciona para a home-screen
+  showScreen('screen-initial');
 }
 
 function stopCamera() {
@@ -162,7 +162,8 @@ async function confirmPhoto() {
 
     const prompt = `Extraia todos os dados do menu e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
      O JSON deve conter as categorias de Saladas(se houver) e Acompanhamentos. 
-     Para cada item, inclua o nome do prato, os ingredientes e preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços) 
+     Para cada item, inclua o nome do prato, os ingredientes(se houver), divisão entre entradas, principais e sobremesas(se houver) e preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços). 
+     Atenção ao título do cardápio caso haja. 
      Certifique-se de seguir o formato de indentação e quebras de linha. Aqui está o menu: ${text}`;
 
     const AIresponse = await fetch('https://api.openai.com/v1/chat/completions', {
