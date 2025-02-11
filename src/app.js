@@ -2,10 +2,12 @@ const cameraView = document.getElementById('camera-view');
 const cameraStream = document.getElementById('camera-stream');
 const takePhotoButton = document.getElementById('take-photo');
 const uploadPhotoButton = document.getElementById('upload-photo');
+const uploadPhotoDemoButton = document.getElementById('upload-photo-demo');
 const photoInput = document.getElementById('photo-input');
 const photoPreview = document.getElementById('photo-preview');
 const confirmPhotoButton = document.getElementById('confirm-photo');
 const retakePhotoButton = document.getElementById('retake-photo');
+const verifyApiKeyButton = document.getElementById('verify-api-key');
 const resultText = document.getElementById('result');
 const copyResultButton = document.getElementById('copy-result');
 const startAppButton = document.getElementById('start-app'); // Nova referência
@@ -121,7 +123,26 @@ function loadPhoto(event) {
   }
 }
 
+function isValidApiKey(apiKey) {
+  return (
+    apiKey.startsWith('sk') && /[a-z]/.test(apiKey) && /[A-Z]/.test(apiKey) && apiKey.length >= 20
+  );
+}
+
 async function confirmPhoto() {
+  const apiKey = document.getElementById('api-key-input').value.trim();
+
+  // api key validation
+  if (!apiKey) {
+    alert('Por favor, insira uma chave API válida.');
+    return;
+  }
+
+  if (!isValidApiKey(apiKey)) {
+    alert('A chave API inserida é inválida.');
+    return;
+  }
+
   try {
     showLoadingSpinner();
 
@@ -148,7 +169,7 @@ async function confirmPhoto() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer --api-key--' // API key goes here
+        Authorization: `Bearer ${apiKey}` // API key goes here
       },
       body: JSON.stringify({
         model: 'gpt-4',
@@ -225,21 +246,47 @@ startAppButton.addEventListener('click', () => {
   startCamera();
 }); // demo screen button //
 
+uploadPhotoDemoButton.addEventListener('click', () => {
+  photoInput.click();
+});
+
 photoInput.addEventListener('change', event => {
   const file = event.target.files[0];
   if (file && file.type.startsWith('image/')) {
     loadPhoto(event);
+    showScreen('screen-confirm');
+    photoInput.value = '';
   } else {
     alert('Por favor, carregue um arquivo de imagem válido.');
     photoInput.value = '';
   }
 });
 
+verifyApiKeyButton.addEventListener('click', async () => {
+  const apiKey = document.getElementById('api-key-input').value.trim();
+
+  if (!apiKey) {
+    showFeedback('Por favor, insira uma chave API válida.', 'bg-red-300 text-red-800');
+    return;
+  }
+
+  if (!isValidApiKey(apiKey)) {
+    showFeedback('A chave API inserida é inválida.', 'bg-red-300 text-red-800');
+    return;
+  }
+
+  showLoadingSpinner();
+
+  setTimeout(() => {
+    hideLoadingSpinner();
+    showFeedback('Chave API verificada com sucesso!', 'bg-green-300 text-green-800');
+  }, 1000); // spinner-delay
+});
+
 confirmPhotoButton.addEventListener('click', confirmPhoto);
 retakePhotoButton.addEventListener('click', () => {
   stopCamera();
-  showScreen('screen-initial');
-  startCamera();
+  showScreen('screen-demo');
 });
 copyResultButton.addEventListener('click', copyResult);
 resetAppButton.addEventListener('click', () => {
