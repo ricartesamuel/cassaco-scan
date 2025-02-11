@@ -162,7 +162,7 @@ async function confirmPhoto() {
 
     const prompt = `Extraia todos os dados do menu e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
      O JSON deve conter as categorias de Saladas(se houver) e Acompanhamentos. 
-     Para cada item, inclua o nome do prato, os ingredientes(se houver), divisão entre entradas, principais e sobremesas(se houver) e preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços). 
+     Para cada item, inclua o nome do prato, os ingredientes(se houver), divisão entre entradas, principais e sobremesas(se houver), divisão entre Massas, pescados, aves, saladas(se houver) e preço. Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços). 
      Atenção ao título do cardápio caso haja. 
      Certifique-se de seguir o formato de indentação e quebras de linha. Aqui está o menu: ${text}`;
 
@@ -206,6 +206,7 @@ async function confirmPhoto() {
     console.error(error);
   } finally {
     hideLoadingSpinner();
+    document.getElementById('api-key-input').value = '';
   }
 }
 
@@ -234,6 +235,7 @@ function copyResult() {
 }
 
 function resetApp() {
+  document.getElementById('api-key-input').value = '';
   resultText.textContent = 'Resultado JSON';
   showScreen('screen-initial');
   startCamera();
@@ -286,6 +288,7 @@ verifyApiKeyButton.addEventListener('click', async () => {
 
 confirmPhotoButton.addEventListener('click', confirmPhoto);
 retakePhotoButton.addEventListener('click', () => {
+  document.getElementById('api-key-input').value = '';
   stopCamera();
   showScreen('screen-demo');
 });
