@@ -63,10 +63,7 @@ Para rodar o projeto localmente, você precisará de:
 
 1. Acesse [OpenAI](https://platform.openai.com/signup) e crie uma conta, caso ainda não tenha uma.
 2. Após o login, acesse [API Keys](https://platform.openai.com/account/api-keys) e gere uma nova chave de API.
-3. Você deve colar sua API KEY no campo onde diz: "Digite ou cole sua chave API aqui..." na tela de confirmação da imagem.
-   ```
-
-   ```
+3. Você deve colar sua API KEY no campo onde diz: "Digite ou cole sua chave API aqui..." na tela de confirmação de imagem.
 
 ## Instalação
 
