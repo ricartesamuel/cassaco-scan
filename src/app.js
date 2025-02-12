@@ -160,12 +160,12 @@ async function confirmPhoto() {
 
     console.log('Texto extraído via OCR: ', text); // ocr text
 
-    const prompt = `Extraia todos os dados do menu e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
-     O JSON deve conter as categorias de Saladas(se houver) e Acompanhamentos. 
-     Para cada item, inclua o nome do prato, os ingredientes(se houver), divisão entre entradas, pratos principais e sobremesas(se houver). 
+    const prompt = `Extraia todos os dados do cardápio e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
+     O JSON deve ser dividido entre as categorias presentes no cardápio. 
+     Para cada item, inclua o nome do prato, os ingredientes(se houver), deve haver divisão entre entradas, pratos principais e sobremesas(se houver). 
      Divisão entre Massas, pescados, aves, saladas(se houver) e preço. 
-     Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar preços). 
-     Atenção ao título do cardápio/restaurante caso haja. 
+     Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar os preços). 
+     Atenção ao título do cardápio/restaurante caso haja e o JSON deve estar em pt-br. 
      Certifique-se de seguir o formato de indentação e quebras de linha. Aqui está o menu: ${text}`;
 
     const AIresponse = await fetch('https://api.openai.com/v1/chat/completions', {
