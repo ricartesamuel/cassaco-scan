@@ -151,9 +151,10 @@ button {
 
 #feedback {
   text-align: center;
-  z-index: 1000;
+  z-index: 1001;
   padding: 8px;
   background-color: transparent;
+  box-shadow: none !important;
 }
 
 #screen-final {
@@ -257,7 +258,7 @@ button {
   }
   #feedback {
     position: fixed;
-    bottom: 100px;
+    bottom: 150px;
     left: 0;
     right: 0;
     text-align: center;
@@ -346,7 +347,7 @@ button {
 
   #feedback {
     position: fixed;
-    bottom: 100px;
+    bottom: 150px;
     left: 0;
     right: 0;
     text-align: center;

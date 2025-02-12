@@ -129,6 +129,16 @@ function isValidApiKey(apiKey) {
   );
 }
 
+function lockInterface() {
+  document.body.style.pointerEvents = 'none';
+  document.getElementById('loading-spinner').classList.remove('hidden');
+}
+
+function unlockInterface() {
+  document.body.style.pointerEvents = 'auto';
+  document.getElementById('loading-spinner').classList.add('hidden');
+}
+
 async function confirmPhoto() {
   const apiKey = document.getElementById('api-key-input').value.trim();
 
@@ -144,7 +154,7 @@ async function confirmPhoto() {
   }
 
   try {
-    showLoadingSpinner();
+    lockInterface();
 
     const canvas = photoPreview.querySelector('canvas');
     const imageData = canvas.toDataURL();
@@ -207,7 +217,7 @@ async function confirmPhoto() {
     showFeedback(`${error.message}`, 'bg-red-300 text-red-800');
     console.error(error);
   } finally {
-    hideLoadingSpinner();
+    unlockInterface();
     document.getElementById('api-key-input').value = '';
   }
 }
@@ -237,10 +247,10 @@ function copyResult() {
 }
 
 function resetApp() {
+  stopCamera();
   document.getElementById('api-key-input').value = '';
   resultText.textContent = 'Resultado JSON';
-  showScreen('screen-initial');
-  startCamera();
+  showScreen('screen-demo');
 }
 
 // event listeners
@@ -280,12 +290,14 @@ verifyApiKeyButton.addEventListener('click', async () => {
     return;
   }
 
+  lockInterface();
   showLoadingSpinner();
 
   setTimeout(() => {
     hideLoadingSpinner();
+    unlockInterface();
     showFeedback('Chave API verificada com sucesso!', 'bg-green-300 text-green-800');
-  }, 1000); // spinner-delay
+  }, 1500); // spinner-delay
 });
 
 confirmPhotoButton.addEventListener('click', confirmPhoto);
@@ -296,7 +308,6 @@ retakePhotoButton.addEventListener('click', () => {
 });
 copyResultButton.addEventListener('click', copyResult);
 resetAppButton.addEventListener('click', () => {
-  stopCamera();
   resetApp();
 });
 
