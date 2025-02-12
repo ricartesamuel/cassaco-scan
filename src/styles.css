@@ -228,7 +228,7 @@ button {
   }
 
   #screen-demo button {
-    padding: 5px 5px; /* Ajustar o padding para dispositivos menores */
+    padding: 5px 5px;
   }
 
   .screen > div:last-child {
@@ -304,7 +304,7 @@ button {
   }
 
   #screen-demo button {
-    padding: 5px 5px; /* Ajustar o padding para dispositivos menores */
+    padding: 5px 5px;
   }
 
   .screen > div:last-child {
@@ -354,10 +354,19 @@ button {
     padding: 8px;
   }
 
+  #screen-confirm {
+    padding-bottom: 120px;
+  }
+
   #screen-confirm .w-full.flex.items-center.gap-2.mb-4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding-bottom: 60px;
+    position: fixed;
+    bottom: 70px;
+    left: 0;
+    right: 0;
+    background-color: #e5e7eb;
+    padding: 16px;
+    z-index: 1000;
+    margin: 0;
   }
 
   #screen-confirm #api-key-input {
