@@ -204,19 +204,21 @@ async function confirmPhoto() {
       data: { text }
     } = await Tesseract.recognize(
       imageData,
-      'por', // lang
+      'por+jpn+eng', // lang
       { logger: info => console.log(info) }
     );
 
     console.log('Texto extraído via OCR: ', text); // ocr text
 
-    const prompt = `Extraia todos os dados do cardápio e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
-     O JSON deve ser dividido entre as categorias presentes no cardápio. 
-     Para cada item, inclua o nome do prato, os ingredientes(se houver), deve haver divisão entre entradas, pratos principais e sobremesas(se houver). 
-     Divisão entre Massas, pescados, aves, saladas(se houver) e preço. 
-     Atenção na diferença de preços por porções: Individual, Meia e Inteira(utilizar esses parâmetros se necessário, para separar os preços). 
-     Atenção ao título do cardápio/restaurante caso haja e o JSON deve estar em pt-br. 
-     Certifique-se de seguir o formato de indentação e quebras de linha. Aqui está o menu: ${text}`;
+    const prompt = `
+    Extraia todos os dados do cardápio e forneça a resposta somente no formato JSON, estruturado corretamente com indentação e quebras de linha.
+    O JSON deve ser dividido entre as categorias presentes no cardápio.
+    Para cada item, inclua o nome do prato, os ingredientes (se houver), e deve haver divisão entre entradas, pratos principais e sobremesas (se houver).
+    Divisão entre Massas, pescados, aves, saladas (se houver) e preço.
+    Atenção na diferença de preços por porções: Individual, Meia e Inteira (utilizar esses parâmetros se necessário, para separar os preços).
+    Atenção ao título do cardápio/restaurante caso haja, e o JSON deve estar em pt-br e se tiver texto em outras linguas como inglês ou japonês, traduza e retorne em pt-br assim mesmo.
+    Se o texto estiver incompleto ou com ruídos, tente inferir as informações com base no contexto.
+    Certifique-se de seguir o formato de indentação e quebras de linha e retorne o JSON mesmo que a maioria do texto esteja ilegível por conta do que foi extraído na OCR. Retorne apenas JSON. Aqui está o menu: ${text}`;
 
     const AIresponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
