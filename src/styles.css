@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* return & home button */
+#back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 28px;
+  transition: color 0.2s ease;
+  top: -5px;
+  left: 0;
+}
+#home-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  padding: 8px;
+  transition: color 0.2s ease;
+  top: -5px;
+  right: 0;
+}
+
+#back-button:hover {
+  color: #1f2937;
+}
+#home-button:hover {
+  color: #1f2937;
+}
+
 /* API key */
 #screen-confirm .w-full.flex.items-center.gap-2.mb-4 {
   margin-top: 1rem;
@@ -135,8 +164,8 @@
 
 #photo-preview canvas {
   @apply max-h-[70vh] w-auto object-contain;
-  max-width: 100%;
-  max-height: 100%;
+  height: 100%;
+  width: 100%;
   border-radius: 8px !important;
   object-fit: contain;
 }
@@ -150,8 +179,9 @@ button {
 }
 
 #feedback {
+  transform: translateY(-20%);
   text-align: center;
-  z-index: 1001;
+  z-index: 9999;
   padding: 8px;
   background-color: transparent;
   box-shadow: none !important;
@@ -262,7 +292,6 @@ button {
     left: 0;
     right: 0;
     text-align: center;
-    z-index: 1000;
     padding: 8px;
   }
   #camera-view {
@@ -351,7 +380,6 @@ button {
     left: 0;
     right: 0;
     text-align: center;
-    z-index: 1000;
     padding: 8px;
   }
 

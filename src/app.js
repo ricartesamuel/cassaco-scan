@@ -12,6 +12,9 @@ const resultText = document.getElementById('result');
 const copyResultButton = document.getElementById('copy-result');
 const startAppButton = document.getElementById('start-app');
 const resetAppButton = document.getElementById('reset-app');
+const backButton = document.getElementById('back-button');
+const homeButton = document.getElementById('home-button');
+const divider = document.getElementById('divider');
 
 function showLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
@@ -21,6 +24,10 @@ function showLoadingSpinner() {
 function hideLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
   spinner.classList.add('hidden');
+}
+
+function goHome() {
+  showScreen('screen-demo');
 }
 
 function startApp() {
@@ -40,8 +47,8 @@ function startCamera() {
   const constraints = {
     video: {
       facingMode: { ideal: 'environment' }, // stnd camera & resolution //
-      width: { min: 1280 },
-      height: { min: 720 },
+      width: { min: 1920 },
+      height: { min: 1080 },
       frameRate: { min: 30 }
     }
   };
@@ -65,6 +72,28 @@ function triggerCameraFlash() {
   setTimeout(() => {
     camera.style.animation = '';
   }, 150);
+}
+
+function goBack() {
+  const currentScreen = document.querySelector('.screen:not(.hidden)').id;
+
+  switch (currentScreen) {
+    case 'screen-confirm':
+      // Voltar para a home-screen
+      showScreen('screen-initial');
+      document.getElementById('photo-preview').innerHTML =
+        '<span id="photo-placeholder" class="text-gray-500">Photo Preview</span>'; // Limpa a pré-visualização da foto
+      break;
+
+    case 'screen-initial':
+      // Voltar para a demo-screen
+      showScreen('screen-demo');
+      break;
+
+    default:
+      // Se estiver na demo-screen, não faz nada (botão já está oculto)
+      break;
+  }
 }
 
 function capturePhoto() {
@@ -91,6 +120,17 @@ function showScreen(screenId) {
   const screenToShow = document.getElementById(screenId);
   if (screenToShow) {
     screenToShow.classList.remove('hidden');
+  }
+
+  // Oculta o botão "Voltar" na demo-screen
+  if (screenId === 'screen-demo') {
+    backButton.classList.add('hidden');
+    homeButton.classList.add('hidden');
+    divider.classList.add('hidden');
+  } else {
+    backButton.classList.remove('hidden');
+    homeButton.classList.remove('hidden');
+    divider.classList.remove('hidden');
   }
 
   if (screenId === 'screen-initial') {
@@ -214,7 +254,7 @@ async function confirmPhoto() {
       throw new Error(`Formato inválido recebido: ${parseError.message}`);
     }
   } catch (error) {
-    showFeedback(`${error.message}`, 'bg-red-300 text-red-800');
+    showFeedback(`${error.message}`, 'bg-red-300 text-red-800 font bold');
     console.error(error);
   } finally {
     unlockInterface();
@@ -228,21 +268,21 @@ function showFeedback(message, styles = 'bg-gray-100 text-gray-700') {
   const messageElement = document.getElementById('feedback-message');
 
   feedbackElement.classList.remove('hidden', 'bg-red-100', 'bg-green-100', 'bg-gray-100');
-  messageElement.className = `text-sm italic px-3 py-2 rounded-lg ${styles}`;
+  messageElement.className = `text-base italic font-bold px-3 py-2 rounded-lg ${styles}`;
   messageElement.textContent = message;
 
   feedbackElement.classList.remove('hidden');
-  setTimeout(() => feedbackElement.classList.add('hidden'), 5000);
+  setTimeout(() => feedbackElement.classList.add('hidden'), 3000);
 }
 
 function copyResult() {
   navigator.clipboard
     .writeText(resultText.textContent)
     .then(() => {
-      alert('Copiado com sucesso!');
+      showFeedback('JSON copiado para a área de transferência!', 'bg-gray-400 text-black');
     })
-    .catch(() => {
-      alert('Erro ao copiar: ', err);
+    .catch(err => {
+      showFeedback('Erro ao copiar o JSON.', 'bg-red-100 text-red-800');
     });
 }
 
@@ -254,6 +294,16 @@ function resetApp() {
 }
 
 // event listeners
+homeButton.addEventListener('click', () => {
+  lockInterface();
+  homeButton.classList.add('opacity-50', 'cursor-not-allowed');
+  setTimeout(() => {
+    goHome();
+    unlockInterface();
+    homeButton.classList.remove('opacity-50', 'cursor-not-allowed');
+  }, 1000);
+});
+backButton.addEventListener('click', goBack);
 takePhotoButton.addEventListener('click', capturePhoto);
 uploadPhotoButton.addEventListener('click', () => photoInput.click());
 startAppButton.addEventListener('click', () => {
@@ -304,7 +354,7 @@ confirmPhotoButton.addEventListener('click', confirmPhoto);
 retakePhotoButton.addEventListener('click', () => {
   document.getElementById('api-key-input').value = '';
   stopCamera();
-  showScreen('screen-demo');
+  showScreen('screen-initial');
 });
 copyResultButton.addEventListener('click', copyResult);
 resetAppButton.addEventListener('click', () => {
@@ -321,7 +371,7 @@ document.addEventListener('visibilitychange', () => {
       if (currentScreen === 'screen-initial') {
         startCamera();
       }
-    }, 100);
+    }, 1000);
   }
 });
 

@@ -25,8 +25,23 @@
 
     <div
       id="app"
-      class="w-full max-w-lg bg-gray-200 shadow-lg rounded-lg overflow-hidden mx-auto border-2 border-gray-500"
+      class="w-full max-w-lg bg-gray-200 shadow-lg rounded-lg overflow-hidden mx-auto border-2 border-gray-500 relative pt-[25px]"
     >
+      <button
+        id="back-button"
+        class="absolute top-4 left-4 text-black hover:text-gray-900 transition-all z-50"
+        aria-label="Voltar"
+      >
+        <i class="fa-solid fa-circle-arrow-left">‌</i>
+      </button>
+      <div id="divider" class="absolute top-5 left-[10%] right-[10%] h-px bg-gray-300"></div>
+      <button
+        id="home-button"
+        class="absolute top-4 right-4 text-black hover:text-gray-900 transition-all z-50 text-4xl"
+        aria-label="Voltar para tela principal"
+      >
+        <i class="fa-solid fa-house"></i>
+      </button>
       <!--camera-trigger-->
       <div id="camera-flash"></div>
       <!-- demo screen -->
@@ -74,10 +89,13 @@
       </div>
 
       <!-- home screen -->
-      <div id="screen-initial" class="screen p-4 h-full flex flex-col">
+      <div
+        id="screen-initial"
+        class="screen p-4 h-full flex flex-col lg:w-[508px] lg:h-[531.812px] lg:justify-between"
+      >
         <div
           id="camera-view"
-          class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg"
+          class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg lg:h-[71.092px]"
         >
           <video
             id="camera-stream"
@@ -88,7 +106,8 @@
           ></video>
           <span id="camera-placeholder" class="text-gray-500">Camera Preview</span>
         </div>
-        <div class="mt-4 flex gap-4">
+        <div class="mt-8 flex gap-4 lg:mt-8">
+          <!-- Espaçamento igual ao da demo-screen -->
           <button
             id="take-photo"
             class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
@@ -114,6 +133,7 @@
           <canvas id="photo-canvas" class="hidden"></canvas>
           <span id="photo-placeholder" class="text-gray-500">Photo Preview</span>
         </div>
+
         <!-- insert api key -->
         <div class="w-full flex items-center gap-2 mb-4">
           <div class="w-full relative">
@@ -146,15 +166,12 @@
             <i class="fas fa-undo"></i> Tirar Outra Foto
           </button>
         </div>
-        <div id="feedback" class="hidden">
-          <span id="feedback-message" class="text-sm italic"></span>
-        </div>
       </div>
 
       <!-- result screen -->
       <div id="screen-final" class="screen p-4 h-full flex flex-col hidden">
         <div class="flex-grow bg-gray-100 p-4 rounded-lg overflow-auto">
-          <pre id="result" class="text-sm text-gray-700">Resultado JSON</pre>
+          <pre id="result" class="text-sm text-gray-800">Resultado JSON</pre>
         </div>
         <div class="mt-4 flex gap-4">
           <button
@@ -170,6 +187,9 @@
             <i class="fas fa-undo"></i> Tentar Novamente
           </button>
         </div>
+      </div>
+      <div id="feedback" class="hidden">
+        <span id="feedback-message"></span>
       </div>
     </div>
 
