@@ -9,8 +9,8 @@ Este projeto é uma aplicação web que permite capturar ou carregar imagens de 
 
 - **HTML**
 - **CSS**
-- **Node.js**
 - **Tailwind CSS**
+- **Node.js**
 - **JavaScript**
 - **Tesseract.js**
 - **OpenAI API**
@@ -92,7 +92,7 @@ Para rodar o projeto localmente, você precisará de:
 ## Como Usar a aplicação
 
 Tela inicial:
-Escolha "Tirar" e dê permissão de acesso à câmera, ou "Imagem" e carregue uma foto de sua escolha.
+Escolha "Tirar Foto" e dê permissão de acesso à câmera, ou "Imagem" e carregue uma foto de sua escolha.
 
 Tirar Foto:
 Clique no botão "Tirar Foto" para capturar uma imagem usando a câmera do dispositivo.

@@ -29,7 +29,7 @@
     >
       <button
         id="back-button"
-        class="absolute top-4 left-4 text-black hover:text-gray-900 transition-all z-50"
+        class="absolute top-[-5px] left-0 text-black hover:text-gray-700 z-50 bg-none border-none cursor-pointer p-[8px] text-[28px] transition-colors duration-200 ease-in-out"
         aria-label="Voltar"
       >
         <i class="fa-solid fa-circle-arrow-left">‌</i>
@@ -37,36 +37,39 @@
       <div id="divider" class="absolute top-5 left-[10%] right-[10%] h-px bg-gray-300"></div>
       <button
         id="home-button"
-        class="absolute top-4 right-4 text-black hover:text-gray-900 transition-all z-50 text-4xl"
+        class="absolute top-[-5px] right-0 text-black hover:text-gray-700 z-50 bg-none border-none cursor-pointer p-[8px] text-[25px] transition-colors duration-200 ease-in-out"
         aria-label="Voltar para tela principal"
       >
         <i class="fa-solid fa-house"></i>
       </button>
       <!--camera-trigger-->
-      <div id="camera-flash"></div>
+      <div
+        id="camera-flash"
+        class="absolute top-0 left-0 w-full h-full bg-black opacity-0 pointer-events-none z-10 transition-opacity duration-200 ease-in-out"
+      ></div>
       <!-- demo screen -->
-      <div id="screen-demo" class="screen p-4 h-full flex flex-col">
-        <div class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg">
+      <div id="screen-demo" class="screen p-4 h-full flex flex-col rounded-lg">
+        <div class="flex-grow flex flex-col items-center justify-center h-full rounded-lg">
           <div class="flex flex-col items-center justify-center">
             <!-- project-logo -->
-            <img src="./assets/logo.png" alt="Logo Preview" class="w-90 h-90 mb-8" />
+            <img src="./assets/logo.png" alt="Logo Preview" class="w-90 h-90 mb-8 mr-4" />
           </div>
         </div>
         <div class="mt-2 flex gap-4">
           <button
             id="start-app"
-            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all text-sm"
           >
             <i class="fa-solid fa-camera"></i> Tirar Foto
           </button>
           <button
             id="upload-photo-demo"
-            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all text-sm"
           >
             <i class="fa-solid fa-folder-open"></i> Imagem
           </button>
           <button
-            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all relative opacity-100 cursor-not-allowed"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all relative opacity-100 cursor-not-allowed text-sm"
             disabled
           >
             <span class="text-sm"><i class="fa-solid fa-file-pdf"></i> Upload PDF</span>
@@ -110,13 +113,13 @@
           <!-- Espaçamento igual ao da demo-screen -->
           <button
             id="take-photo"
-            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all text-sm"
           >
             <i class="fa-solid fa-camera"></i> Tirar Foto
           </button>
           <button
             id="upload-photo"
-            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all text-sm"
           >
             <i class="fa-solid fa-folder-open"></i> Carregar Imagem
           </button>
@@ -128,25 +131,28 @@
       <div id="screen-confirm" class="screen p-4 h-full flex flex-col hidden">
         <div
           id="photo-preview"
-          class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg"
+          class="flex-grow bg-gray-200 flex items-center justify-center rounded-lg relative h-full w-full overflow-hidden"
         >
-          <canvas id="photo-canvas" class="hidden"></canvas>
+          <canvas
+            id="photo-canvas"
+            class="max-h-[70vh] object-contain h-full w-full rounded-lg"
+          ></canvas>
           <span id="photo-placeholder" class="text-gray-500">Photo Preview</span>
         </div>
 
         <!-- insert api key -->
-        <div class="w-full flex items-center gap-2 mb-4">
+        <div class="w-full flex items-center gap-2 mt-4 mb-4">
           <div class="w-full relative">
             <input
               type="text"
               id="api-key-input"
-              class="w-full bg-gray-300 border border-gray-500 rounded-lg py-2 px-3 text-black"
+              class="w-full bg-gray-200 border border-gray-500 rounded-lg py-2 px-3 text-gray-700 text-sm cursor-text pr-10"
               placeholder="Digite ou cole sua chave API aqui..."
               autocomplete="off"
             />
             <button
               id="verify-api-key"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent border-none cursor-pointer"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-none border-none cursor-pointer p-0 m-0 text-black"
             >
               <i class="fa-solid fa-arrow-right-to-bracket"></i>
             </button>
@@ -155,13 +161,13 @@
         <div id="confirm-screen-buttons" class="mt-4 flex gap-4">
           <button
             id="confirm-photo"
-            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all text-sm"
           >
             <i class="fa-solid fa-upload"></i> Analisar Imagem
           </button>
           <button
             id="retake-photo"
-            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all text-sm"
           >
             <i class="fas fa-undo"></i> Tirar Outra Foto
           </button>
@@ -170,25 +176,25 @@
 
       <!-- result screen -->
       <div id="screen-final" class="screen p-4 h-full flex flex-col hidden">
-        <div class="flex-grow bg-gray-100 p-4 rounded-lg overflow-auto">
+        <div class="flex-grow bg-gray-100 p-4 rounded-lg overflow-auto max-h-[calc(100vh-120px)]">
           <pre id="result" class="text-sm text-gray-800">Resultado JSON</pre>
         </div>
         <div class="mt-4 flex gap-4">
           <button
             id="copy-result"
-            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all"
+            class="flex-1 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all text-sm"
           >
             <i class="fa-solid fa-copy"></i> Copiar JSON
           </button>
           <button
             id="reset-app"
-            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all"
+            class="flex-1 bg-gray-300 text-black py-2 rounded-lg border border-gray-500 hover:bg-gray-400 transition-all text-sm"
           >
             <i class="fas fa-undo"></i> Tentar Novamente
           </button>
         </div>
       </div>
-      <div id="feedback" class="hidden">
+      <div id="feedback" class="hidden text-center z-[9999] p-2 bg-transparent shadow-none">
         <span id="feedback-message"></span>
       </div>
     </div>
