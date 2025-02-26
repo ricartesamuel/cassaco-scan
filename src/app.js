@@ -15,6 +15,7 @@ const resetAppButton = document.getElementById('reset-app');
 const backButton = document.getElementById('back-button');
 const homeButton = document.getElementById('home-button');
 const divider = document.getElementById('divider');
+let cameraPermissionDenied = false;
 
 function showLoadingSpinner() {
   const spinner = document.getElementById('loading-spinner');
@@ -44,6 +45,10 @@ function stopCamera() {
 }
 
 function startCamera() {
+  if (cameraPermissionDenied) {
+    return; // Se a permissão já foi negada, não tente novamente
+  }
+
   const constraints = {
     video: {
       facingMode: { ideal: 'environment' }, // stnd camera & resolution //
@@ -62,7 +67,11 @@ function startCamera() {
     })
     .catch(error => {
       console.error('Erro ao acessar a câmera: ', error);
-      alert('Por favor, permita o acesso à câmera para usar o aplicativo.');
+      cameraPermissionDenied = true;
+      showFeedback(
+        'Por favor, permita o acesso à câmera para usar a aplicação',
+        'bg-red-300 text-red-800'
+      );
     });
 }
 
@@ -370,7 +379,7 @@ document.addEventListener('visibilitychange', () => {
   } else if (document.visibilityState === 'visible') {
     setTimeout(() => {
       const currentScreen = document.querySelector('.screen:not(.hidden)').id;
-      if (currentScreen === 'screen-initial') {
+      if (currentScreen === 'screen-initial' && !cameraPermissionDenied) {
         startCamera();
       }
     }, 1000);
